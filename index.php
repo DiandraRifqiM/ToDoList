@@ -27,8 +27,8 @@
         <ul>
           <li><a href="">Home</a></li>
           <li><a href="">Project</a></li>
-          <li><a href="">Unfinish</a></li>
-          <li><a href="">Home</a></li>
+          <li><a href="">Finish</a></li>
+          <li><a href="">Log Out</a></li>
         </ul>
       </div>
     </nav>
