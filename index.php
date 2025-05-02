@@ -9,20 +9,27 @@
   <!-- fetaher icon -->
   <script src="https://unpkg.com/feather-icons"></script>
   <body>
+
+    <!-- Navbar -->
     <nav class="navbar">
+
+      <!-- Logo -->
       <a href="#" class="navbar-logo">Kenangan<span>Terindah</span></a>
 
-      <div class="navbar-nav">
-        <a href="#home">Home</a>
-        <a href="#about">Tentang Kami</a>
-        <a href="#menu">Menu</a>
-        <a href="#kontak">Kontak</a>
+      <!-- Search bar -->
+      <div class="navbar-extra">
+        <input type="text" name="search" placeholder="Search" autofocus size="20"> 
+        <!-- <i data-feather="search"></i> -->
       </div>
 
-      <div class="navbar-extra">
-        <a href="#" id="search"><i data-feather="search"></i></a>
-        <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
-        <a href="#" id="diandras-menu"><i data-feather="menu"></i></a>
+      <!-- Navbar Menu -->
+      <div class="navbar-nav">
+        <ul>
+          <li><a href="">Home</a></li>
+          <li><a href="">Project</a></li>
+          <li><a href="">Unfinish</a></li>
+          <li><a href="">Home</a></li>
+        </ul>
       </div>
     </nav>
     <script>
