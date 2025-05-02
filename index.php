@@ -8,16 +8,6 @@
 <body>
     <h1>Hello From Diandra</h1>
     <h1>Hello From Alfito</h1>
-    <form action="" method="post">
-        <li>
-            <input type="text">
-        </li>
-        <li>
-            <input type="text">
-        </li>
-        <li>
-            <input type="text" placeholder="Alfito Cuki">
-        </li>
-    </form>
+    <h1>Ini Diandra Terbaru</h1>
 </body>
 </html>
