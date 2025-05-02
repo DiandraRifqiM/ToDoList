@@ -32,6 +32,30 @@
         </ul>
       </div>
     </nav>
+    
+    <!-- class tabel -->
+    <section class="section" id="Projek">
+      <h3>Projek</h3>
+      <div class="grid">
+        <div class="card">
+          <h4>Projek 1</h4>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+        <div class="card">
+          <h4>Projek 2</h4>
+          <p>
+            Lorem ipsum dolor sit amet.
+          </p>
+        </div>
+        <div class="card">
+          <h4>Projek 3</h4>
+          <p>
+            Lorem ipsum dolor sit amet.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <script>
       feather.replace();
     </script>
