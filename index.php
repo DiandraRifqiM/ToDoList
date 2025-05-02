@@ -6,8 +6,7 @@
     <title>Test</title>
 </head>
 <body>
-    <h1>Hello From Diandra</h1>
-    <h1>Hello From Alfito</h1>
-    <h1>Ini Diandra Terbaru</h1>
+    <h1>this is capten speaking</h1>
+
 </body>
 </html>
