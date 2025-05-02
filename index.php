@@ -16,7 +16,7 @@
             <input type="text">
         </li>
         <li>
-            <input type="text">
+            <input type="text" placeholder="Alfito Cuki">
         </li>
     </form>
 </body>
