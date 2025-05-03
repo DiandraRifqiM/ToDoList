@@ -321,6 +321,11 @@ html {
   font-size: 1.2rem;
 }
 
+.Detail :hover {
+  background-color: rgb(75, 125, 125);
+  transition: 0.5s;
+}
+
 .projectCard p {
   color: var(--primary);
   font-size: 1.2rem;

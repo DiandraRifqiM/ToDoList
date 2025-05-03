@@ -20,9 +20,7 @@
           name="search"
           placeholder="Search"
           autofocus
-          size="20"
-        />
-        <!-- <i data-feather="search"></i> -->
+          size="20"/>
       </div>
 
       <!-- Navbar Menu -->
@@ -38,12 +36,16 @@
 
     <!-- Project Table -->
     <div class="projectTable">
+
       <div class="projectCard">
         <h2>Project1</h2>
-        <div class="description">
-          Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Mauris imperdiet quam eu blandit vestibulum.
-        </div>
+        <a href="projectDetail.php" class="Detail">
+          <div class="description">
+            Detail: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Mauris imperdiet quam eu blandit vestibulum.
+          </div>
+        </a>
+
         <p>Created by: Diandra</p>
         <label for="statusSelect1">Status:</label>
         <select
@@ -62,20 +64,23 @@
       </div>
 
       <div class="projectCard">
-        <h2>Project2</h2>
-        <div class="description">
-          Description: Another project description goes here. This is just a
-          sample for testing flex layout.
-        </div>
-        <p>Created by: Alex</p>
-        <label for="statusSelect2">Status:</label>
+        <h2>Project1</h2>
+        <a href="projectDetail.php" class="Detail">
+          <div class="description">
+            Description: Another project description goes here. This is just a
+            sample for testing flex layout.
+          </div>
+        </a>
+
+        <p>Created by: Alfito</p>
+        <label for="statusSelect1">Status:</label>
         <select
-          id="statusSelect2"
-          class="statusDropdown red"
+          id="statusSelect1"
+          class="statusDropdown green"
           onchange="updateStatus(this)"
         >
-          <option value="Finished">Finished</option>
-          <option value="Unfinish" selected>Unfinish</option>
+          <option value="Finished" selected>Finished</option>
+          <option value="Unfinish">Unfinish</option>
           <option value="On Progress">On Progress</option>
         </select>
         <div class="buttons">
@@ -83,6 +88,7 @@
           <button>Delete</button>
         </div>
       </div>
+      
     </div>
 
     <!-- Script -->
