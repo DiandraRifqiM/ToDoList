@@ -37,7 +37,7 @@
 
     <!-- Icon plus -->
     <div class="createIcon">
-      <a href="#" class="createLink">
+      <a href="addProject.php" class="createLink">
         <i data-feather="plus"></i>
       </a>
     </div>
