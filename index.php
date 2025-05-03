@@ -5,20 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kopi kenangan Diandra</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
   </head>
-  <!-- fetaher icon -->
-  <script src="https://unpkg.com/feather-icons"></script>
   <body>
-
     <!-- Navbar -->
     <nav class="navbar">
-
       <!-- Logo -->
       <a href="#" class="navbar-logo">Kenangan<span>Terindah</span></a>
 
       <!-- Search bar -->
       <div class="navbar-extra">
-        <input type="text" name="search" placeholder="Search" autofocus size="20"> 
+        <input
+          type="text"
+          name="search"
+          placeholder="Search"
+          autofocus
+          size="20"
+        />
         <!-- <i data-feather="search"></i> -->
       </div>
 
@@ -32,34 +35,57 @@
         </ul>
       </div>
     </nav>
-    
-    <!-- class tabel -->
-    <section class="section" id="Projek">
-      <h3>Projek</h3>
-      <div class="grid">
-        <div class="card">
-          <h4>Projek 1</h4>
-          <p>Lorem ipsum dolor sit amet.</p>
+
+    <!-- Project Table -->
+    <div class="projectTable">
+      <div class="projectCard">
+        <h2>Project1</h2>
+        <div class="description">
+          Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris imperdiet quam eu blandit vestibulum.
         </div>
-        <div class="card">
-          <h4>Projek 2</h4>
-          <p>
-            Lorem ipsum dolor sit amet.
-          </p>
-        </div>
-        <div class="card">
-          <h4>Projek 3</h4>
-          <p>
-            Lorem ipsum dolor sit amet.
-          </p>
+        <p>Created by: Diandra</p>
+        <label for="statusSelect1">Status:</label>
+        <select
+          id="statusSelect1"
+          class="statusDropdown green"
+          onchange="updateStatus(this)"
+        >
+          <option value="Finished" selected>Finished</option>
+          <option value="Unfinish">Unfinish</option>
+          <option value="On Progress">On Progress</option>
+        </select>
+        <div class="buttons">
+          <button>Edit</button>
+          <button>Delete</button>
         </div>
       </div>
-    </section>
 
-    <script>
-      feather.replace();
-    </script>
-    <!-- my js -->
+      <div class="projectCard">
+        <h2>Project2</h2>
+        <div class="description">
+          Description: Another project description goes here. This is just a
+          sample for testing flex layout.
+        </div>
+        <p>Created by: Alex</p>
+        <label for="statusSelect2">Status:</label>
+        <select
+          id="statusSelect2"
+          class="statusDropdown red"
+          onchange="updateStatus(this)"
+        >
+          <option value="Finished">Finished</option>
+          <option value="Unfinish" selected>Unfinish</option>
+          <option value="On Progress">On Progress</option>
+        </select>
+        <div class="buttons">
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script -->
     <script src="script.js"></script>
   </body>
 </html>
