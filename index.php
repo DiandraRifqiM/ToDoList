@@ -28,8 +28,8 @@
       <div class="navbar-nav">
         <ul>
           <li><a href="">Home</a></li>
-          <li><a href="">Project</a></li>
-          <li><a href="">Finish</a></li>
+          <li><a href="">Task</a></li>
+          <li><a href=""><i data-feather="user"></i></a></li>
           <li><a href=""><i data-feather="log-out"></i></a></li>
         </ul>
       </div>
