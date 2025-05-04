@@ -86,7 +86,11 @@
 
         <div class="buttons">
           <button><i data-feather="edit"></i></button>
-          <button><i data-feather="trash-2"></i></button>
+          <button>
+            <a href="del1.php?id=<?= urlencode($project['id'])?>&user_id=<?= urlencode($userId)?>" onclick="return confirm('You Sure ?')">
+              <i data-feather="trash-2"></i>
+            </a>
+          </button>
         </div>
       </div>
     <?php endforeach; ?>

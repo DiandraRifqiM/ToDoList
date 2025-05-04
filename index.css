@@ -381,6 +381,10 @@ select.statusDropdown.orange {
   gap: 1rem;
 }
 
+.buttons a {
+  color: white;
+}
+
 button {
   flex: 1;
   padding: 0.6rem 1rem;

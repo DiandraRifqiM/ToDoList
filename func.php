@@ -72,4 +72,12 @@
     }
     
 
+    // Delete Project Function
+
+    function delProject($id, $user_id){
+        global $db;
+        mysqli_query($db, "DELETE FROM projects WHERE id = '$id' && user_id = '$user_id'");
+
+        return mysqli_affected_rows($db);
+    }
 ?>
