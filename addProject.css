@@ -19,14 +19,23 @@ body {
   flex-direction: column;
 }
 
-.AddProject input,
-.AddProject textarea {
+.AddProject input {
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
   resize: vertical;
+}
+
+.AddProject textarea {
+  /* height: 50px; */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  resize: none;
 }
 
 .AddProject textarea {
@@ -63,17 +72,17 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.viewProjectsLink {
+.viewProjects {
   margin-top: 20px;
   align-self: flex-end;
-  color: rgb(116, 111, 111);
+  color: white;
   text-decoration: none;
   font-weight: lighter;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 15px;
 }
 
-.viewProjectsLink:hover {
+.viewProjects:hover {
   text-decoration: underline;
 }
 
@@ -84,4 +93,32 @@ body {
   border-radius: 6px;
   font-size: 14px;
   width: 100%;
+}
+
+.AddProject label {
+  color: white;
+  font-size: large;
+}
+
+select.statusDropdown {
+  margin-top: 10px;
+  font-weight: bold;
+  border: 1px solid var(--primary);
+  border-radius: 0.5rem;
+  /* background-color: transparent; */
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  color: var(--primary);
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+select.statusDropdown.green {
+  color: green;
+}
+select.statusDropdown.red {
+  color: red;
+}
+select.statusDropdown.orange {
+  color: orange;
 }

@@ -52,10 +52,10 @@
 }
 
 .signIn {
-  /* float: left; */
   margin-top: 20px;
+  font-size: 15px;
   margin-left: 80%;
-  color: rgb(116, 111, 111);
+  color: white;
   text-decoration: none;
   font-weight: lighter;
   font-family: Arial, Helvetica, sans-serif;

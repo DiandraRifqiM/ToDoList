@@ -1,107 +1,103 @@
+<?php 
+
+  // Call Function
+  require 'func.php';
+
+  if (!isset($_GET['id'])) {
+      echo "User ID not provided.";
+      exit;
+  }
+
+  $userId = (int)$_GET['id'];
+
+  // Get Current User Data
+  $userData = Query("SELECT * FROM users WHERE id = $userId");
+  if (!$userData) {
+      echo "User not found.";
+      exit;
+  }
+  $userData = $userData[0];
+
+  // Get Project By User Id
+  $getProject = Query("SELECT * FROM projects WHERE user_id = $userId");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kopi kenangan Diandra</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://unpkg.com/feather-icons"></script>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-      <!-- Logo -->
-      <a href="#" class="navbar-logo">Kenangan<span>Terindah</span></a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kopi Kenangan Diandra</title>
+  <link rel="stylesheet" href="index.css" />
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
 
-      <!-- Search bar -->
-      <div class="searchBar">
-        <i data-feather="search" class="search-icon"></i>
-        <input
-          type="text"
-          name="search"
-          placeholder="Search"
-          autofocus
-        />
-      </div>
-
-      <!-- Navbar Menu -->
-      <div class="navbar-nav">
-        <ul>
-          <li><a href="">Home</a></li>
-          <li><a href="">Task</a></li>
-          <li><a href=""><i data-feather="user"></i></a></li>
-          <li><a href=""><i data-feather="log-out"></i></a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Icon plus -->
-    <div class="createIcon">
-      <a href="addProject.php" class="createLink">
-        <i data-feather="plus"></i>
-      </a>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#" class="navbar-logo">Kenangan<span>Terindah</span></a>
+    <div class="searchBar">
+      <i data-feather="search" class="search-icon"></i>
+      <input type="text" name="search" placeholder="Search" autofocus />
     </div>
+    <div class="navbar-nav">
+      <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">Task</a></li>
+        <li><a href=""><i data-feather="user"></i></a></li>
+        <li><a href="login.php"><i data-feather="log-out"></i></a></li>
+      </ul>
+    </div>
+  </nav>
 
-    <!-- Project Table -->
-    <div class="projectTable">
-      <!-- Project Card 1 -->
+  <!--Add Project-->
+  <div class="createIcon">
+    <a href="addProject.php?id=<?= $userId ?>" class="createLink">
+      <i data-feather="plus"></i>
+    </a>
+  </div>
+
+  <!-- Project Table -->
+  <div class="projectTable">
+    <?php foreach ($getProject as $project): ?>
       <div class="projectCard">
-        <h2>Project1</h2>
-        <a href="projectDetail.php" class="Detail">
+        <h2><?= htmlspecialchars($project['title']) ?></h2>
+
+        <a href="projectDetail.php?id=<?= (int)$project['id'] ?>" class="Detail">
           <div class="description">
-            Detail: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Mauris imperdiet quam eu blandit vestibulum.
+            Detail: <?= htmlspecialchars($project['description']) ?>
           </div>
         </a>
-        <p>Created by: Diandra</p>
-        <label for="statusSelect1">Status:</label>
+
+        <p>Created by: <?= htmlspecialchars($userData['name']) ?></p>
+
+        <label for="statusSelect<?= $project['id'] ?>">Status:</label>
         <select
-          id="statusSelect1"
-          class="statusDropdown green"
+          id="statusSelect<?= $project['id'] ?>"
+          class="statusDropdown 
+            <?= strtolower($project['status']) === 'finished' ? 'green' : 
+                (strtolower($project['status']) === 'on progress' ? 'orange' : 'red') ?>"
           onchange="updateStatus(this)"
         >
-          <option value="Finished" selected>Finished</option>
-          <option value="Unfinish">Unfinish</option>
-          <option value="On Progress">On Progress</option>
+          <option value="Finished" <?= $project['status'] === 'Finished' ? 'selected' : '' ?>>Finished</option>
+          <option value="Not Finished" <?= $project['status'] === 'Not Finished' ? 'selected' : '' ?>>Not Finished</option>
+          <option value="On Progress" <?= $project['status'] === 'On Progress' ? 'selected' : '' ?>>On Progress</option>
         </select>
+
         <div class="buttons">
           <button><i data-feather="edit"></i></button>
           <button><i data-feather="trash-2"></i></button>
         </div>
       </div>
+    <?php endforeach; ?>
+  </div>
 
-      <!-- Project Card 2 -->
-      <div class="projectCard">
-        <h2>Project1</h2>
-        <a href="projectDetail.php" class="Detail">
-          <div class="description">
-            Detail: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Mauris imperdiet quam eu blandit vestibulum.
-          </div>
-        </a>
-        <p>Created by: Alfito</p>
-        <label for="statusSelect2">Status:</label>
-        <select
-          id="statusSelect2"
-          class="statusDropdown green"
-          onchange="updateStatus(this)"
-        >
-          <option value="Finished" selected>Finished</option>
-          <option value="Unfinish">Unfinish</option>
-          <option value="On Progress">On Progress</option>
-        </select>
-        <div class="buttons">
-          <button><i data-feather="edit"></i></button>
-          <button><i data-feather="trash-2"></i></button>
-        </div>
-      </div>
-    </div>
+  <!-- Feather Icons Script -->
+  <script>
+    feather.replace();
+  </script>
 
-    <script>
-      feather.replace();
-    </script>
-
-    <!-- Script -->
-    <script src="script.js"></script>
-  </body>
+  <!-- Link JS -->
+  <script src="script.js"></script>
+</body>
 </html>

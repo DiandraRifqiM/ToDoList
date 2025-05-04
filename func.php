@@ -3,6 +3,21 @@
     // Connect DB
     $db = mysqli_connect("localhost:3307", "root", "", "todolist");
 
+
+    // Print Data Function
+    function Query($query){
+
+        global $db;
+        $result = mysqli_query($db, $query);
+        $rows = [];
+        
+        while($row = mysqli_fetch_assoc($result)){
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+
     // Sign In Function
     function signIn($data){
         
@@ -36,5 +51,25 @@
 
         return mysqli_affected_rows($db);
     }
+
+
+    // Add Data Project Function
+
+    function addProject($data) {
+        global $db;
+    
+        $user_id = (int)$data['user_id'];
+        $title = htmlspecialchars($data['title']);
+        $description = htmlspecialchars($data['description']);
+        $status = htmlspecialchars($data['status']);
+    
+        $query = "INSERT INTO projects (user_id, title, description, status)
+                  VALUES ('$user_id', '$title', '$description', '$status')";
+    
+        mysqli_query($db, $query);
+    
+        return mysqli_affected_rows($db);
+    }
+    
 
 ?>

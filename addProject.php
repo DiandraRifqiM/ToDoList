@@ -1,42 +1,82 @@
+<?php 
+
+    // Call Func
+    require 'func.php';
+
+    // Check User Id
+    if (!isset($_GET["id"]) || !is_numeric($_GET["id"])) {
+        echo "User ID not found or invalid.";
+        exit;
+    }
+
+    $id = (int)$_GET["id"];
+    $user = Query("SELECT * FROM users WHERE id = $id");
+
+    if (!$user) {
+        echo "User not found.";
+        exit;
+    }
+
+    $userData = $user[0];
+
+    
+    if (isset($_POST["addProject"])) {
+        if (addProject($_POST) > 0) {
+            echo "<script>
+                    alert('New Project Added!');
+                    document.location.href='index.php?id={$userData['id']}';
+                </script>";
+        } else {
+            echo "<script>
+                    alert('Error!');
+                    document.location.href='addProject.php?id={$userData['id']}';
+                </script>";    
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Project</title>
-    <link rel="stylesheet" href="addProject.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Project</title>
+  <link rel="stylesheet" href="addProject.css" />
 </head>
 <body>
-    <?php
-        $error = false;
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $title = $_POST["Title"];
-            $description = $_POST["Description"];
-            $status = $_POST["status"]; // ambil status dari form
-        }
-    ?>
 
-    <div class="AddProject">
-        <?php if ($error): ?>
-            <div class="error-message">Semua field wajib diisi.</div>
-        <?php endif; ?>
+  <!-- Add Project -->
+  <div class="AddProject">
+    <form action="" method="post">
+      <input type="hidden" name="user_id" value="<?= htmlspecialchars($userData['id']) ?>" />
+      <input type="text" name="title" id="title" placeholder="Title" required />
+      <textarea
+        name="description"
+        id="description"
+        placeholder="Description"
+        required
+      ></textarea>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <input type="text" name="Title" placeholder="Title" required>
-            <textarea name="description" placeholder="Description" required></textarea>
+      <!-- Add Status  -->
+      <label for="statusSelect1">Status:</label>
+      <select
+        id="statusSelect1"
+        class="statusDropdown green"
+        name="status"
+        onchange="updateStatus(this)"
+      >
+        <option value="Finished" selected>Finished</option>
+        <option value="Not Finished">Not Finished</option>
+        <option value="On Progress">On Progress</option>
+      </select>
 
-            <!-- Status Dropdown -->
-            <label for="status">Status:</label>
-            <select name="status" id="status" class="statusDropdown" required>
-                <option value="">-- Pilih Status --</option>
-                <option value="Finished">Finished</option>
-                <option value="Unfinish">Unfinish</option>
-                <option value="On Progress">On Progress</option>
-            </select>
+      <!-- Add Project Button -->
+      <button type="submit" name="addProject" id="addProject">Add Project</button>
+      <a href="index.php?id=<?= $userData['id'] ?>" class="viewProjects">View Projects</a>
+    </form>
+  </div>
 
-            <button type="submit" name="submit">Add Project</button>
-            <a href="projectList.php" class="viewProjectsLink">View Projects</a>
-        </form>
-    </div>
+  <!-- Script -->
+  <script src="add.js"></script>
 </body>
 </html>

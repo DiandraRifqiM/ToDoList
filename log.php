@@ -14,8 +14,9 @@
 
             $getData = mysqli_fetch_assoc($getUser);
 
-            if(password_verify($password, $getData["password"])){
-                header("Location: index.php");
+            if (password_verify($password, $getData["password"])) {
+                $userId = $getData["id"];
+                header("Location: index.php?id=$userId"); // Pass user ID
                 exit;
             }
         }
