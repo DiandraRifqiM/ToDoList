@@ -23,7 +23,7 @@
         
         global $db;
 
-        $name = strtolower(stripslashes($data["name"]));
+        $name = stripslashes($data["name"]);
         $username = strtolower(stripslashes($data["username"]));
         $password = mysqli_real_escape_string($db, $data["password"]);
         $password2 = mysqli_real_escape_string($db, $data["password2"]);
