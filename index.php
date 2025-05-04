@@ -27,8 +27,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kopi Kenangan Diandra</title>
-  <link rel="stylesheet" href="index.css" />
+  <title>Quests</title>
+  <link rel="stylesheet" href="css/index.css" />
   <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
@@ -84,8 +84,17 @@
           <option value="On Progress" <?= $project['status'] === 'On Progress' ? 'selected' : '' ?>>On Progress</option>
         </select>
 
+
+        <!-- Delete and Edit Button -->
         <div class="buttons">
-          <button><i data-feather="edit"></i></button>
+          <!-- Edit -->
+          <button>
+            <a href="editProject.php">
+              <i data-feather="edit"></i>
+            </a>
+          </button>
+
+          <!-- Delete -->
           <button>
             <a href="del1.php?id=<?= urlencode($project['id'])?>&user_id=<?= urlencode($userId)?>" onclick="return confirm('You Sure ?')">
               <i data-feather="trash-2"></i>

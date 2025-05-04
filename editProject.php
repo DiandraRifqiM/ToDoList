@@ -40,13 +40,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Project</title>
-  <link rel="stylesheet" href="css/addProject.css" />
+  <title>Edit Project</title>
+  <link rel="stylesheet" href="css/editProject.css" />
 </head>
 <body>
 
   <!-- Add Project -->
-  <div class="AddProject">
+  <div class="editProject">
     <form action="" method="post">
       <input type="hidden" name="user_id" value="<?= htmlspecialchars($userData['id']) ?>" />
       <input type="text" name="title" id="title" placeholder="Title" required />
@@ -71,7 +71,7 @@
       </select>
 
       <!-- Add Project Button -->
-      <button type="submit" name="addProject" id="addProject">Add Project</button>
+      <button type="submit" name="addProject" id="addProject">Update Project</button>
       <a href="index.php?id=<?= $userData['id'] ?>" class="viewProjects">View Projects</a>
     </form>
   </div>
