@@ -30,12 +30,13 @@
   <title>Quests</title>
   <link rel="stylesheet" href="css/index.css" />
   <script src="https://unpkg.com/feather-icons"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <!-- Navbar -->
   <nav class="navbar">
-    <a href="#" class="navbar-logo">Kenangan<span>Terindah</span></a>
+    <a href="#" class="navbar-logo">Que<span>2ts</span></a>
     <div class="searchBar">
       <i data-feather="search" class="search-icon"></i>
       <input type="text" name="search" placeholder="Search" autofocus />
