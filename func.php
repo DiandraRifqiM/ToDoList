@@ -54,7 +54,6 @@
 
 
     // Add Data Project Function
-
     function addProject($data) {
         global $db;
     
@@ -79,5 +78,28 @@
         mysqli_query($db, "DELETE FROM projects WHERE id = '$id' && user_id = '$user_id'");
 
         return mysqli_affected_rows($db);
+    }
+
+
+    // Update Project Function
+    function updProject($data){
+        global $db;
+
+        // Get Current Data
+        $id = mysqli_real_escape_string($db, (int)$data["id"]);
+        $user_id = mysqli_real_escape_string($db, (int)$data["user_id"]);
+        $title = mysqli_real_escape_string($db, htmlspecialchars($data["title"]));
+        $description = mysqli_real_escape_string($db, htmlspecialchars($data["description"]));
+        $status = mysqli_real_escape_string($db, htmlspecialchars($data["status"]));
+
+        // Query For Update
+        $updQuery = "UPDATE projects SET
+                    title = '$title',
+                    description = '$description',
+                    status = '$status'
+                    WHERE id = '$id' AND user_id = '$user_id'
+                    ";
+        return mysqli_query($db, $updQuery);
+
     }
 ?>

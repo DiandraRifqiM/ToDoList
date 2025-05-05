@@ -20,6 +20,31 @@
 
   // Get Project By User Id
   $getProject = Query("SELECT * FROM projects WHERE user_id = $userId");
+
+
+  // Edit Status
+  if(isset($_POST["status"]) && isset($_POST["project_id"])){
+
+    $status = mysqli_real_escape_string($db, $_POST["status"]);
+    $projectId = (int)$_POST["project_id"];
+
+    // Edit Status Proses
+    $edtQuery = "UPDATE projects SET status = '$status' WHERE id = $projectId AND user_id = $userId";
+    $edtStatus = mysqli_query($db, $edtQuery);
+
+    if ($edtStatus) {
+      echo "<script>
+              alert('Status Updated!');
+              document.location.href = 'index.php?id=$userId';
+            </script>";
+    }else{
+      echo "<script>
+            alert('Failed to update status.');
+            </script>";
+    }
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -72,25 +97,28 @@
 
         <p>Created by: <?= htmlspecialchars($userData['name']) ?></p>
 
-        <label for="statusSelect<?= $project['id'] ?>">Status:</label>
-        <select
-          id="statusSelect<?= $project['id'] ?>"
-          class="statusDropdown 
-            <?= strtolower($project['status']) === 'finished' ? 'green' : 
-                (strtolower($project['status']) === 'on progress' ? 'orange' : 'red') ?>"
-          onchange="updateStatus(this)"
-        >
-          <option value="Finished" <?= $project['status'] === 'Finished' ? 'selected' : '' ?>>Finished</option>
-          <option value="Not Finished" <?= $project['status'] === 'Not Finished' ? 'selected' : '' ?>>Not Finished</option>
-          <option value="On Progress" <?= $project['status'] === 'On Progress' ? 'selected' : '' ?>>On Progress</option>
-        </select>
+        <!-- Status -->
+        <form method="POST" action="">
+          <input type="hidden" name="project_id" value="<?= $project['id'] ?>">
+          <select
+            name="status"
+            class="statusDropdown 
+              <?= strtolower($project['status']) === 'finished' ? 'green' : 
+                  (strtolower($project['status']) === 'on progress' ? 'orange' : 'red') ?>"
+            onchange="if (confirm('You sure?')) { this.form.submit(); } else { this.value = '<?= $project['status'] ?>'; }"
+          >
+            <option value="Finished" <?= $project['status'] === 'Finished' ? 'selected' : '' ?>>Finished</option>
+            <option value="Not Finished" <?= $project['status'] === 'Not Finished' ? 'selected' : '' ?>>Not Finished</option>
+            <option value="On Progress" <?= $project['status'] === 'On Progress' ? 'selected' : '' ?>>On Progress</option>
+          </select>
+        </form>
 
 
         <!-- Delete and Edit Button -->
         <div class="buttons">
           <!-- Edit -->
           <button>
-            <a href="editProject.php">
+          <a href="editProject.php?id=<?= urlencode($project['id'])?>&user_id=<?= urlencode($userId)?>">
               <i data-feather="edit"></i>
             </a>
           </button>

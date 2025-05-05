@@ -1,39 +1,53 @@
-<?php 
+<?php
+  // Call Function
+  require 'func.php';
 
-    // Call Func
-    require 'func.php';
+  // Get User Id
+  if (!isset($_GET['id']) || !isset($_GET['user_id'])) {
+    echo "Project ID or User ID not found.";
+    exit;
+  }
 
-    // Check User Id
-    if (!isset($_GET["id"]) || !is_numeric($_GET["id"])) {
-        echo "User ID not found or invalid.";
-        exit;
-    }
+  $projectId = (int) $_GET['id'];    
+  $userId = (int) $_GET['user_id'];     
 
-    $id = (int)$_GET["id"];
-    $user = Query("SELECT * FROM users WHERE id = $id");
 
-    if (!$user) {
-        echo "User not found.";
-        exit;
-    }
+  // Get Current User Data
+  $userData = Query("SELECT * FROM users WHERE id = $userId");
+  if (!$userData) {
+      echo "User not found.";
+      exit;
+  }
+  $userData = $userData[0];
 
-    $userData = $user[0];
+  // Get Project By User ID
+  $getProjectData = Query("SELECT * FROM projects WHERE id = $projectId AND user_id = $userId");
 
-    
-    if (isset($_POST["addProject"])) {
-        if (addProject($_POST) > 0) {
-            echo "<script>
-                    alert('New Project Added!');
-                    document.location.href='index.php?id={$userData['id']}';
+
+  if (!$getProjectData || count($getProjectData) === 0) {
+      echo "No project found for this user.";
+      exit;
+  }
+
+  $getProject = $getProjectData[0];
+
+  // Update Process
+  if (isset($_POST["updProject"])) {
+      if (updProject($_POST) > 0) {
+          echo "<script>
+                  alert('Project Updated!');
+                  document.location.href = 'index.php?id={$userData['id']}';
                 </script>";
-        } else {
-            echo "<script>
-                    alert('Error!');
-                    document.location.href='addProject.php?id={$userData['id']}';
-                </script>";    
-        }
-    }
+      } else {
+          echo "<script>
+                  alert('Error!');
+                  document.location.href = 'updProject.php?id={$userData['id']}';
+                </script>";
+      }
+  }
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,14 +62,15 @@
   <!-- Add Project -->
   <div class="editProject">
     <form action="" method="post">
+      <input type="hidden" name="id" value="<?= htmlspecialchars($getProject['id']) ?>" />
       <input type="hidden" name="user_id" value="<?= htmlspecialchars($userData['id']) ?>" />
-      <input type="text" name="title" id="title" placeholder="Title" required />
+      <input type="text" name="title" id="title" placeholder="Title" value="<?= htmlspecialchars($getProject['title'])?>" required />
       <textarea
         name="description"
         id="description"
         placeholder="Description"
         required
-      ></textarea>
+        ><?= htmlspecialchars($getProject['description'])?></textarea>
 
       <!-- Add Status  -->
       <label for="statusSelect1">Status:</label>
@@ -63,6 +78,7 @@
         id="statusSelect1"
         class="statusDropdown green"
         name="status"
+        value="<?= htmlspecialchars($getProject['status'])?>"
         onchange="updateStatus(this)"
       >
         <option value="Finished" selected>Finished</option>
@@ -71,7 +87,7 @@
       </select>
 
       <!-- Add Project Button -->
-      <button type="submit" name="addProject" id="addProject">Update Project</button>
+      <button type="submit" name="updProject" id="updProject" onclick="return confirm('You sure ?')">Update Project</button>
       <a href="index.php?id=<?= $userData['id'] ?>" class="viewProjects">View Projects</a>
     </form>
   </div>
