@@ -144,4 +144,28 @@
 
         return mysqli_affected_rows($db);
     }
+
+
+    // Edit Task
+    function updTask($data){
+        global $db;
+
+        $id = mysqli_real_escape_string($db, $data["id"]);
+        $user_id = mysqli_real_escape_string($db, $data["user_id"]);
+        $project_id = mysqli_real_escape_string($db, $data["project_id"]);
+        $title = mysqli_real_escape_string($db, $data["title"]);
+        $description = mysqli_real_escape_string($db, $data["description"]);
+        $assign = mysqli_real_escape_string($db, $data["assign"]);
+        $status = mysqli_real_escape_string($db, $data["status"]);
+    
+        $updQuery = "UPDATE tasks SET
+                        title = '$title',
+                        description = '$description',
+                        assign = '$assign',
+                        status = '$status'
+                        WHERE id = '$id' AND user_id = '$user_id' AND project_id = '$project_id'
+                        ";
+        
+        return mysqli_query($db, $updQuery);
+    }
 ?>

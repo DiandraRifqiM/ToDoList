@@ -140,7 +140,7 @@
           <div class="buttons">
             <!-- Edit -->
             <button>
-              <a href="editTask.php?id=<?= $task['id'] ?>&user_id=<?= $userId ?>">
+              <a href="editTask.php?id=<?= urlencode($task['id']) ?>&user_id=<?= urlencode($task['user_id']) ?>&project_id=<?= urlencode($task['project_id'])?>">
                 <i data-feather="edit"></i>
               </a>
             </button>
