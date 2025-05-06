@@ -68,10 +68,10 @@
     </div>
     <div class="navbar-nav">
       <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="">Task</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="task.php">Task</a></li>
         <li><a href=""><i data-feather="user"></i></a></li>
-        <li><a href="login.php"><i data-feather="log-out"></i></a></li>
+        <li><a href="log.php"><i data-feather="log-out"></i></a></li>
       </ul>
     </div>
   </nav>
@@ -89,7 +89,7 @@
       <div class="projectCard">
         <h2><?= htmlspecialchars($project['title']) ?></h2>
 
-        <a href="projectDetail.php?id=<?= (int)$project['id'] ?>" class="Detail">
+        <a href="task.php?id=<?= (int)$project['id'] ?>&user_id=<?= (int)$project['user_id']?>" class="Detail">
           <div class="description">
             Detail: <?= htmlspecialchars($project['description']) ?>
           </div>

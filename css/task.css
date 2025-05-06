@@ -1,0 +1,38 @@
+/* Container tombol di kiri atas */
+.projectDetail {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  display: flex;
+  gap: 12px; /* jarak antar tombol */
+  z-index: 1000;
+}
+
+/* Style umum untuk kedua tombol */
+.iconButton {
+  background: #2c7a7b;
+  color: white;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+/* Ukuran ikon */
+.iconButton svg {
+  width: 28px;
+  height: 28px;
+  stroke: white;
+}
+
+/* Hover */
+.projectDetail :hover {
+  background-color: rgb(33, 94, 94);
+  transition: 0.5s;
+}

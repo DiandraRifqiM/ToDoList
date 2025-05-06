@@ -25,7 +25,7 @@
 
 
   if (!$getProjectData || count($getProjectData) === 0) {
-      echo "No project found for this user.";
+      echo "No Project Found!";
       exit;
   }
 
@@ -54,7 +54,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edit Project</title>
+  <title>Update Project</title>
   <link rel="stylesheet" href="css/editProject.css" />
 </head>
 <body>
