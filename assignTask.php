@@ -1,14 +1,24 @@
 <?php
-// allTasks.php
+
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION["login"])) {
+  header("Location: log.php");
+  exit;
+}
+
+// Get user ID from session
+$userId = $_SESSION["user_id"];
 
 require 'func.php';
 
-if (!isset($_GET['user_id'])) {
-    echo "User ID not provided.";
-    exit;
-}
+// if (!isset($_GET['user_id'])) {
+//     echo "User ID not provided.";
+//     exit;
+// }
 
-$userId = (int)$_GET['user_id'];
+// $userId = (int)$_GET['user_id'];
 
 // Get user
 $userData = Query("SELECT * FROM users WHERE id = $userId");

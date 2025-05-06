@@ -1,15 +1,27 @@
 <?php 
+
+  session_start();
+
+  // Check if user is logged in
+  if (!isset($_SESSION["login"])) {
+    header("Location: log.php");
+    exit;
+  }
+
+  // Get user ID from session
+  $userId = $_SESSION["user_id"];
+
   // Call Func 
   require 'func.php';
 
   // Validate ID
-  if (!isset($_GET['id']) || !isset($_GET['user_id'])) {
+  if (!isset($_GET['id']) || !isset($userId)) {
       echo "Project ID or User ID not found.";
       exit;
   }
 
   $projectId = (int) $_GET['id'];    
-  $userId = (int) $_GET['user_id'];     
+  // $userId = (int) $_GET['user_id'];     
 
   // Get User Data
   $userData = Query("SELECT * FROM users WHERE id = $userId");

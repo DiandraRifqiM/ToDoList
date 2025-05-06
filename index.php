@@ -2,7 +2,7 @@
 
   session_start();
 
-  // Check if user is logged in; if not, redirect to login
+  // Check if user is logged in
   if (!isset($_SESSION["login"])) {
     header("Location: log.php");
     exit;
