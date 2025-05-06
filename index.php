@@ -1,53 +1,64 @@
 <?php 
-require 'func.php';
 
-if (!isset($_GET['id'])) {
-    echo "User ID not provided.";
-    exit;
-}
+  // Call Func
+  require 'func.php';
 
-$userId = (int)$_GET['id'];
+  if (!isset($_GET['id'])) {
+      echo "User ID not provided.";
+      exit;
+  }
 
-// Get current user
-$userData = Query("SELECT * FROM users WHERE id = $userId");
-if (!$userData) {
-    echo "User not found.";
-    exit;
-}
-$userData = $userData[0];
+  $userId = (int)$_GET['id'];
 
-// Get projects owned by user
-$getProject = Query("SELECT * FROM projects WHERE user_id = $userId");
+  // Get current user
+  $userData = Query("SELECT * FROM users WHERE id = $userId");
+  if (!$userData) {
+      echo "User not found.";
+      exit;
+  }
+  $userData = $userData[0];
 
-// Determine first relevant project (owned or assigned)
-$firstProjectId = null;
+  // Get projects owned by user
+  $getProject = Query("SELECT * FROM projects WHERE user_id = $userId");
 
-if (!empty($getProject)) {
-    $firstProjectId = (int)$getProject[0]['id'];
-} else {
-    // Check if user is assigned to any task
-    $username = mysqli_real_escape_string($db, $userData['username']);
-    $assignedTask = Query("SELECT project_id FROM tasks WHERE assign = '$username' LIMIT 1");
-    if (!empty($assignedTask)) {
-        $firstProjectId = (int)$assignedTask[0]['project_id'];
-    }
-}
+  // Determine first relevant project (owned or assigned)
+  $firstProjectId = null;
 
-// Handle status change
-if (isset($_POST["status"]) && isset($_POST["project_id"])) {
-    $status = mysqli_real_escape_string($db, $_POST["status"]);
-    $projectId = (int)$_POST["project_id"];
+  if (!empty($getProject)) {
+      $firstProjectId = (int)$getProject[0]['id'];
+  } else {
+      // Check if user is assigned to any task
+      $username = mysqli_real_escape_string($db, $userData['username']);
+      $assignedTask = Query("SELECT project_id FROM tasks WHERE assign = '$username' LIMIT 1");
+      if (!empty($assignedTask)) {
+          $firstProjectId = (int)$assignedTask[0]['project_id'];
+      }
+  }
 
-    $update = "UPDATE projects SET status = '$status' WHERE id = $projectId AND user_id = $userId";
-    if (mysqli_query($db, $update)) {
-        echo "<script>
-                alert('Status Updated!');
-                document.location.href = 'index.php?id=$userId';
-              </script>";
-    } else {
-        echo "<script>alert('Failed to update status.');</script>";
-    }
-}
+  // Handle Status Change
+  if (isset($_POST["status"]) && isset($_POST["project_id"])) {
+      $status = mysqli_real_escape_string($db, $_POST["status"]);
+      $projectId = (int)$_POST["project_id"];
+
+      $update = "UPDATE projects SET status = '$status' WHERE id = $projectId AND user_id = $userId";
+      if (mysqli_query($db, $update)) {
+          echo "<script>
+                  alert('Status Updated!');
+                  document.location.href = 'index.php?id=$userId';
+                </script>";
+      } else {
+          echo "<script>
+                  alert('Error!');
+                </script>";
+      }
+  }
+
+
+  // Get assign 
+  $getTask = Query("SELECT * FROM tasks");
+  $getAssign = !empty($getTask) ? $getTask[0]['assign'] : null;
+  
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +84,7 @@ if (isset($_POST["status"]) && isset($_POST["project_id"])) {
         <li><a href="index.php?id=<?= $userId ?>">Home</a></li>
         <?php if ($firstProjectId): ?>
           <li>
-            <a href="task.php?id=<?= $firstProjectId ?>&user_id=<?= $userId ?>">Task</a>
+            <a href="task.php?id=<?= $firstProjectId ?>&user_id=<?= $userId ?>&assign=<?= $getAssign?>">Task</a>
           </li>
         <?php else: ?>
           <li>
