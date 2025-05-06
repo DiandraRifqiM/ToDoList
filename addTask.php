@@ -31,6 +31,21 @@
     }
 
     $getProject = $getProjectData[0];
+
+    if(isset($_POST["addTask"])){
+      
+      if(addTask($_POST) > 0){
+        echo "<script>
+                  alert('New Task Added!');
+                  document.location.href='task.php?id={$getProject['id']}&user_id={$getProject['user_id']}';
+              </script>";
+      } else {
+      echo "<script>
+              alert('Error!');
+              document.location.href='addTask.php?id={$getProject['id']}&user_id={$getProject['user_id']}';
+          </script>";    
+      }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +61,7 @@
   <!-- Add Task -->
   <div class="AddTask">
     <form action="" method="post">
-      <input type="hidden" name="id" value="<?= htmlspecialchars($getProject['id']) ?>" />
+      <input type="hidden" name="project_id" value="<?= htmlspecialchars($getProject['id']) ?>" />
       <input type="hidden" name="user_id" value="<?= htmlspecialchars($getProject['user_id']) ?>" />
       <input type="text" name="title" id="title" placeholder="Title" required />
       <textarea
@@ -55,6 +70,8 @@
         placeholder="Description"
         required
       ></textarea>
+      <input type="text" name="assign" placeholder="Assign to" />
+
 
       <!-- Add Status  -->
       <label for="statusSelect1">Status:</label>
@@ -76,6 +93,6 @@
   </div>
 
   <!-- Script -->
-  <script src="add.js"></script>
+  <script src="js/add.js"></script>
 </body>
 </html>

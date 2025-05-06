@@ -102,4 +102,37 @@
         return mysqli_query($db, $updQuery);
 
     }
+
+    // Add Task Funciton
+    function addTask($data){
+        global $db;
+
+        $title = htmlspecialchars($data["title"]);
+        $description = htmlspecialchars($data["description"]);;
+        $assign = htmlspecialchars($data["assign"]);
+        $status = htmlspecialchars($data["status"]);
+        $user_id = (int)$data["user_id"];
+        $project_id = (int)$data["project_id"];
+
+        // Check uname & name
+        $getName = mysqli_query($db, "SELECT * FROM users WHERE username = '$assign'");
+
+        if(mysqli_fetch_assoc($getName)){
+            echo  "<script>
+                        alert('User Assigned!');
+                    </script>";    
+        }else{
+            echo  "<script>
+                        alert('User Not Found!');
+                    </script>"; 
+            return false;             
+        }
+
+        $addQuery = "INSERT INTO tasks VALUES ('', '$title', '$description', '$assign', '$status' ,'$user_id', '$project_id')";
+
+        mysqli_query($db, $addQuery);
+
+        return mysqli_affected_rows($db);
+
+    }
 ?>
