@@ -1,4 +1,5 @@
 <?php 
+    session_start();
 
     // Call Func
     require 'func.php';
@@ -16,13 +17,19 @@
 
             if (password_verify($password, $getData["password"])) {
                 $userId = $getData["id"];
-                header("Location: index.php?id=$userId"); // Pass user ID
+            
+                // Set session
+                $_SESSION["login"] = true;
+                $_SESSION["user_id"] = $userId; // <-- Store user ID in session
+                
+                // Redirect to index.php with user_id as a query parameter
+                header("Location: index.php?id=$userId");
                 exit;
             }
+            
         }
         $error = true;
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +42,7 @@
 </head>
 <body>
     <?php if(isset($error)): ?>
-        <h1>Error</h1>
+        <h1>Error: Invalid username or password!</h1>
     <?php endif; ?>
     <!-- Login Page -->
     <div class="Login">

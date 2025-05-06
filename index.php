@@ -1,14 +1,19 @@
 <?php 
 
-  // Call Func
-  require 'func.php';
+  session_start();
 
-  if (!isset($_GET['id'])) {
-      echo "User ID not provided.";
-      exit;
+  // Check if user is logged in; if not, redirect to login
+  if (!isset($_SESSION["login"])) {
+    header("Location: log.php");
+    exit;
   }
 
-  $userId = (int)$_GET['id'];
+  // Get user ID from session
+  $userId = $_SESSION["user_id"];
+
+
+  // Call Func
+  require 'func.php';
 
   // Get current user
   $userData = Query("SELECT * FROM users WHERE id = $userId");
