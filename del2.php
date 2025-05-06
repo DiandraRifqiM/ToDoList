@@ -1,13 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>
-        This is delete for task
-    </h1>
-</body>
-</html>
+<?php 
+
+    // Call Func
+    require 'func.php';
+
+    // Get Task and Project
+    $id = (int)$_GET["id"];
+    $user_id = (int)$_GET["user_id"];
+    $project_id = (int)$_GET["project_id"];
+
+    if (delTask($id, $user_id, $project_id) > 0) {
+        echo "<script>
+                alert('Task Deleted!');
+                document.location.href='task.php?id=$project_id&user_id=$user_id';
+              </script>";
+    } else {
+        echo "<script>
+                alert('Error!');
+                document.location.href='task.php?id=$project_id&user_id=$user_id';
+              </script>";
+    }
+    
+
+?>

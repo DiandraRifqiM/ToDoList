@@ -24,7 +24,7 @@
         global $db;
 
         $name = stripslashes($data["name"]);
-        $username = strtolower(stripslashes($data["username"]));
+        $username = stripslashes($data["username"]);
         $password = mysqli_real_escape_string($db, $data["password"]);
         $password2 = mysqli_real_escape_string($db, $data["password2"]);
         
@@ -134,5 +134,14 @@
 
         return mysqli_affected_rows($db);
 
+    }
+
+
+    // Delete Task Funciton
+    function delTask($id, $user_id, $project_id){
+        global $db;
+        mysqli_query($db, "DELETE FROM tasks WHERE id = '$id' && user_id = '$user_id' && project_id = '$project_id'");
+
+        return mysqli_affected_rows($db);
     }
 ?>

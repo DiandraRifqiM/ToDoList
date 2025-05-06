@@ -84,11 +84,11 @@
         <li><a href="index.php?id=<?= $userId ?>">Home</a></li>
         <?php if ($firstProjectId): ?>
           <li>
-            <a href="task.php?id=<?= $firstProjectId ?>&user_id=<?= $userId ?>&assign=<?= $getAssign?>">Task</a>
+            <a href="assignTask.php?user_id=<?= $userId ?>">Assign</a>
           </li>
         <?php else: ?>
           <li>
-            <a href="#" onclick="alert('No projects or assigned tasks found.'); return false;">Task</a>
+            <a href="#" onclick="alert('No projects or assigned tasks found.'); return false;">Assign</a>
           </li>
         <?php endif; ?>
         <li><a href="#"><i data-feather="user"></i></a></li>
@@ -149,7 +149,7 @@
         </div>
       <?php endforeach; ?>
     <?php else: ?>
-      <p style="text-align:center; padding: 2rem;">You don’t own any projects yet. Assigned tasks are still accessible through the Task menu if available.</p>
+      <p style="text-align:center; padding: 2rem; color: black;">You don’t own any projects yet. Assigned tasks are still accessible through the Task menu if available.</p>
     <?php endif; ?>
   </div>
 
