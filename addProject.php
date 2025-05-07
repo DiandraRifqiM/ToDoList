@@ -1,16 +1,27 @@
 <?php 
 
+    session_start();
+
+    // Check if user is logged in
+    if (!isset($_SESSION["login"])) {
+      header("Location: log.php");
+      exit;
+    }
+
+    // Get user ID from session
+    $userId = $_SESSION["user_id"];
+
     // Call Func
     require 'func.php';
 
     // Check User Id
-    if (!isset($_GET["id"]) || !is_numeric($_GET["id"])) {
+    if (!isset($_GET["id"]) || !is_numeric($userId)) {
         echo "User ID not found or invalid.";
         exit;
     }
 
     $id = (int)$_GET["id"];
-    $user = Query("SELECT * FROM users WHERE id = $id");
+    $user = Query("SELECT * FROM users WHERE id = $userId");
 
     if (!$user) {
         echo "User not found.";
