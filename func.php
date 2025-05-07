@@ -168,4 +168,17 @@
         
         return mysqli_query($db, $updQuery);
     }
+
+    
+    // Live Search Function
+    function search($search){
+
+        $srcQuery = "SELECT * FROM projects WHERE
+                    title LIKE '%$search%' || description LIKE '%$search%'";
+        
+
+        return Query($srcQuery);
+    }
+
+
 ?>

@@ -40,6 +40,12 @@
       }
   }
 
+
+  // Live Search
+  if (isset($_POST["search"])) {
+    $getProject = search(trim($_POST["search"]));
+  }
+
   // Handle Status Change
   if (isset($_POST["status"]) && isset($_POST["project_id"])) {
       $status = mysqli_real_escape_string($db, $_POST["status"]);
@@ -80,10 +86,15 @@
   <!-- Navbar -->
   <nav class="navbar">
     <a href="#" class="navbar-logo">Que<span>2ts</span></a>
-    <div class="searchBar">
-      <i data-feather="search" class="search-icon"></i>
-      <input type="text" name="search" placeholder="Search" autofocus />
-    </div>
+
+    <!-- Search Bar -->
+    <form action="" method="post">   
+      <div class="searchBar">
+        <input type="text" name="search" placeholder="Search" autofocus />
+        <i data-feather="search" class="search-icon"></i>
+      </div>
+    </form>
+
     <div class="navbar-nav">
       <ul>
         <li><a href="index.php?id=<?= $userId ?>">Home</a></li>
@@ -97,7 +108,7 @@
           </li>
         <?php endif; ?>
         <li><a href="#"><i data-feather="user"></i></a></li>
-        <li><a href="log.php"><i data-feather="log-out"></i></a></li>
+        <li><a href="logout.php"><i data-feather="log-out"></i></a></li>
       </ul>
     </div>
   </nav>
