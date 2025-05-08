@@ -115,7 +115,7 @@
         $project_id = (int)$data["project_id"];
 
         // Check uname & name
-        $getName = mysqli_query($db, "SELECT * FROM users WHERE username = '$assign'");
+        $getName = mysqli_query($db, "SELECT * FROM users WHERE username = '$assign' ");
 
         if(mysqli_fetch_assoc($getName)){
             echo  "<script>
