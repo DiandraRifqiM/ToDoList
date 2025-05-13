@@ -81,7 +81,7 @@
         placeholder="Description"
         required
       ></textarea>
-      <input type="text" name="assign" placeholder="Assign to" />
+      <input type="text" name="assign" placeholder="Assign to" required/>
 
 
       <!-- Add Status  -->

@@ -75,6 +75,11 @@
 
     function delProject($id, $user_id){
         global $db;
+
+        // Delete tasks inside project
+        mysqli_query($db, "DELETE FROM tasks WHERE project_id = '$id'");
+
+        // Delete 
         mysqli_query($db, "DELETE FROM projects WHERE id = '$id' && user_id = '$user_id'");
 
         return mysqli_affected_rows($db);
